@@ -16,12 +16,14 @@ Solution by "tjklemz" from [apple.stackexchange.com](https://apple.stackexchange
     - `MBRFormat` Master Boot Record
 
 ### Installing the *NOOBS* software
-The easiest step ... if needed, step by step instruction can be found [here](https://projects.raspberrypi.org/en/projects/raspberry-pi-setting-up): 
+The easiest task:
 1. Download [raspberrypi.org>Downloads>NOOBS](https://www.raspberrypi.org/downloads/noobs/)
 2. Extract
 3. Place the files to the root of the SD card that you formatted in the previous step.
 4. SD to rPi
-5. Boot up and choose Raspbian (at least the one with Desktop ...)
+5. Boot up and choose Raspbian (at least the one with Desktop
+
+Step by step instruction can be found on [projects.raspberrypi.org](https://projects.raspberrypi.org/en/projects/raspberry-pi-setting-up) if needed...
 
 ### Change/modify the following
 **password**, hostname, screen size, what you plan on using on the rPi (I2C, SPI, remote GPIO, ...)
@@ -34,3 +36,20 @@ will be done tomorrow
 ### Reinstall `pip` and `pip3` to get the most recent version
 
 ### Jupyter
+
+### Setting a static IP
+The following steps can be used to set a static IP on rPi. Follow it only if you cannot reserve a static IP for rPi on your router. The instructions are based on the "Milliways" answer from [raspberrypi.stackexchange.com](https://raspberrypi.stackexchange.com/a/74428/52236)
+1. PREREQUISITES:
+     - the IP that you want to set and the network size: `ip -4 addr show | grep global` command returns <current ip>/<network size> for all global connections on rPi.
+     - router address/gateway: `ip route | grep default | awk '{print $3}'`
+     - DNS server: `cat /etc/resolv.conf`
+2. Multiple options are now possible, here is the `dhcpcd method` that I followed and it worked.
+Edit the following file `/etc/dhcpcd.conf` via `sudo nano /etc/dhcpcd.conf` and enter the following:
+```
+# Example static IP configuration:
+interface wlan0
+static ip_address=<wanted ip>/<network size>
+static routers=<router address/gateway>
+static domain_name_servers=<DNS server> 8.8.8.8 fd51:42f8:caae:d92e::1
+```
+That should do it.

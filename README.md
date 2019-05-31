@@ -160,3 +160,7 @@ Installing is now easy as you have pip 19+:
 The status of the service can be checked with `systemctl status jupyter.service`.
 
 At one point it would be better to just follow the instructions from [https://github.com/kleinee/jns](https://github.com/kleinee/jns).
+
+### Shut down command without timeout
+
+`sudo shutdown -h now` or `sudo halt -p`

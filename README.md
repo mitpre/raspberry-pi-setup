@@ -43,7 +43,7 @@ The following steps can be used to set a static IP on rPi. Follow it only if you
      - the IP that you want to set and the network size: `ip -4 addr show | grep global` command returns <current ip>/<network size> for all global connections on rPi.
      - router address/gateway: `ip route | grep default | awk '{print $3}'`
      - DNS server: `cat /etc/resolv.conf`
-2. Multiple options are now possible, here is the `dhcpcd method` that I followed and it worked.
+2. I followed the `dhcpcd method` and it worked. For other options look into "Milliways" answer.
 Edit the following file `/etc/dhcpcd.conf` via `sudo nano /etc/dhcpcd.conf` and enter the following:
 ```
 # Example static IP configuration:

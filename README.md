@@ -21,7 +21,13 @@ The easiest task:
 2. Extract
 3. Place the files to the root of the SD card that you formatted in the previous step.
 4. SD to rPi
-5. Boot up and choose Raspbian (at least the one with Desktop
+5. Boot up, choose Raspbian (at least the one with Desktop) and wait
+6. Follow the Welcome to Raspberry Pi 'setup' guide
+     - Set Cuntry: leave everything as it is and you will change it afterwards ... they have some problems with it.
+     - Change Password: d00h
+     - Set Up Screen: tick the box if you agree
+     - Select WiFi Network & Enter WiFi Password: recomended
+     - Update Software: yes
 
 Step by step instruction can be found on [projects.raspberrypi.org](https://projects.raspberrypi.org/en/projects/raspberry-pi-setting-up) if needed...
 

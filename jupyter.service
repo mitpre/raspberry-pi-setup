@@ -8,10 +8,10 @@ After=multi-user.target
 [Service]
 Type=idle
 PIDFile=/run/jupyter.pid
-ExecStart=/bin/bash -c "/usr/local/bin/jupyter-notebook --config=/home/mip/.jupyter/jupyter_notebook_config.py > /home/mip/Notebooks/notebook.log 2>&1"
-User=mip
-Group=mip
-WorkingDirectory=/home/mip/Notebooks/
+ExecStart=/bin/bash -c "/usr/local/bin/jupyter-notebook --config=/home/<new user>/.jupyter/jupyter_notebook_config.py > /home/<new user>/Notebooks/notebook.log 2>&1"
+User=<new user>
+Group=<new user>
+WorkingDirectory=/home/<new user>/Notebooks/
 Restart=always
 RestartSec=10
 #KillMode=mixed
@@ -20,4 +20,4 @@ RestartSec=10
 WantedBy=multi-user.target
 
 # IF THIS DOES NOT WORK THEN PUT THE FOLLOWING LINE TO /etc/rc.local JUST BEFORE exit 0
-# su mip -c "/usr/local/bin/jupyter-notebook --config=/home/mip/.jupyter/jupyter_notebook_config.py --notebook-dir='/home/mip/Notebooks/' --debug > /home/mip/Notebooks/notebook.log 2>&1"
+# su <new user> -c "/usr/local/bin/jupyter-notebook --config=/home/<new user>/.jupyter/jupyter_notebook_config.py --notebook-dir='/home/<new user>/Notebooks/' --debug > /home/<new user>/Notebooks/notebook.log 2>&1"

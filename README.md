@@ -16,8 +16,8 @@ Solution by "tjklemz" from [apple.stackexchange.com](https://apple.stackexchange
     - `MBRFormat` Master Boot Record
 
 ### Installing the *NOOBS* software
-The easiest step: [raspberrypi.org>Downloads>NOOBS](https://www.raspberrypi.org/downloads/noobs/)
-1. Download
+The easiest step ... if needed, step by step instruction can be found [here](https://projects.raspberrypi.org/en/projects/raspberry-pi-setting-up): 
+1. Download [raspberrypi.org>Downloads>NOOBS](https://www.raspberrypi.org/downloads/noobs/)
 2. Extract
 3. Place the files to the root of the SD card that you formatted in the previous step.
 4. SD to rPi

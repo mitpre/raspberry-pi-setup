@@ -130,7 +130,7 @@ And the same for python2.
 ### Jupyter
 
 Installing is now easy as you have pip 19+:
-1) pip3 install jupyter
+1) sudo pip3 install jupyter
 2) If you want to access it remotely
 	- `jupyter notebook --generate-config` this generates config file in `/home/<new user>/.jupyter/jupyter_notebook_config.py`
 	- in that config file you have to change and/or uncomment:
@@ -144,4 +144,19 @@ Installing is now easy as you have pip 19+:
 		 from notebook.auth import passwd
 		 passwd()
 		 ```
+		 - enter the desired password
+		 - copy the result to `c.NotebookApp.password = u'<returned value>'`
 
+	- create a service to start at boot by putting `jupyter.service` to `/lib/systemd/system/` folder
+	- then run
+	```
+	sudo chmod 644 /lib/systemd/system/jupyter.service
+	sudo systemctl daemon-reload
+	sudo systemctl enable jupyter.service
+	sudo systemctl restart jupyter.service
+	sudo reboot
+	```
+
+The status of the service can be checked with `systemctl status jupyter.service`.
+
+At one point it would be better to just follow the instructions from [https://github.com/kleinee/jns](https://github.com/kleinee/jns).

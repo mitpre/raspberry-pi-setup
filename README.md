@@ -34,7 +34,7 @@ Step by step instruction to this point can be found on [projects.raspberrypi.org
 
 7. rPi Menu > Prefrences > Raspberry Pi Configuration:
 	 - System > Change Hostname: yes!
-	 - System > Boot: To CLI; needed to change the username; after reboot you login in console and can afterwards start the desktop with `startx`
+	 - System > Boot: To CLI; needed to change the user; after reboot you login in console and can afterwards start the desktop with `startx`
 	 - System > Auto Login: untick
 	 - Interfaces: thick what you need
 	 - Localisation > Locale: here you can change the language, & shit
@@ -49,19 +49,37 @@ Step by step instruction to this point can be found on [projects.raspberrypi.org
      - `sudo apt-get autoremove`
      - `sudo apt-get autoclean`
 
-### Change the default `pi` username
+### Change the default `pi` user
 
-Step by step tuorial by "Dr Beco" from [raspberrypi.stackexchange.com](https://raspberrypi.stackexchange.com/a/68963/52236)
+Step by step tuorial by "Dr Beco" from [raspberrypi.stackexchange.com](https://raspberrypi.stackexchange.com/a/68963/52236) (summed up here). Worth to take a look also [here](https://raspberrypi.stackexchange.com/questions/7133/how-to-change-user-pi-sudo-permissions-how-to-add-other-accounts-with-different).
 
-1) While logged in with username `pi` start the terminal and set the password for root account with `sudo passwd root`
-
-
-
-### Update
-
-### Reinstall `pip` and `pip3` to get the most recent version
-
-### Jupyter
+1) While logged in with user `pi` start the terminal and set the password for the root account with `sudo passwd root`
+2) Reboot: `sudo reboot`
+3) Login with user `root`
+4) Check with `ps -u pi` to see an empty list; no processes owned by user `pi`
+5) Change the `pi` user in `/etc/passwd` to `<new user>`:
+	- `usermod -l <new user> pi`
+	- You can check the `/etc/passwd` before/after with `tail /etc/passwd`.
+6) Check if `<new user>` is working with: `su <new user>` 
+7) Change the group name in `/etc/group` from `pi` to `<new user>`:
+	- `groupmod -n <new user> pi`.
+	- You can check the `/etc/group` before/after with `tail /etc/group`.
+	- At this point '/home/pi' folder should belong to `<new user>`. Check with `ls -la /home/pi`.
+8) Rename the `/home/pi` folder to `/home/<new user>`
+	- `mv /home/pi /home/<new user>`
+9) Associate the `<new user>` home folder with `<new user>`
+	- `usermod -d /home/<new user> <new user>`
+10) Reboot: `sudo reboot`
+11) Login to `<new user>`
+12) Check that `<new user>` is `sudoer` with `sudo su -`
+13) Change the following folder `/etc/sudoers.d`:
+	 - `ls -la /etc/sudoers.d` should give you: `010_at-export, 010_pi-nopasswd, README`
+	 - change `010_pi-nopasswd` to `010_<new user>-passwd` with `sudo mv ...`
+	 - change the content of `010_<new user>-passwd` from `pi ALL=(ALL) NOPASSWD: ALL` to `<new user> ALL=(ALL) PASSWD: ALL`
+14) Reboot: `sudo reboot`
+15) login as `<new user>` and delete `root` account with:
+	 - `sudo passwd -l root`
+16) Get the graphical interface with `startx` and you can set up the login to Desktop if needed, but I would still not use auto login.
 
 ### Setting a static IP
 The following steps can be used to set a static IP on rPi. Follow it only if you cannot reserve a static IP for rPi on your router. The instructions are based on the "Milliways" answer from [raspberrypi.stackexchange.com](https://raspberrypi.stackexchange.com/a/74428/52236)
@@ -79,3 +97,51 @@ static routers=<router address/gateway>
 static domain_name_servers=<DNS server> 8.8.8.8 fd51:42f8:caae:d92e::1
 ```
 That should do it.
+
+
+### Set up the passw-less SSH Access
+
+This is nicely decribed on [raspberrypi.org](https://www.raspberrypi.org/documentation/remote-access/ssh/passwordless.md).
+
+
+### Reinstall `pip` and `pip3` to get the most recent version
+
+`pip` versions installed with raspberry pi are ancient, therefore run the following (by 'sorin' from [stackoverflow.com](https://stackoverflow.com/a/37531821/3290167))
+```
+sudo apt-get remove python-pip python3-pip
+wget https://bootstrap.pypa.io/get-pip.py
+sudo python get-pip.py
+sudo python3 get-pip.py
+rm get-pip.py
+pip3 install --upgrade pip
+pip install --upgrade pip
+```
+
+If you only use `pip install --upgrade pip` and `pip3 install --upgrade pip` you end up in a fucked up situation. Then you have to remove the following:
+```
+/home/mip/.local/bin/pip
+/home/mip/.local/bin/pip3
+/home/mip/.local/bin/pip3.5
+/home/mip/.local/lib/python3.5/site-packages/pip-19.1.1.dist-info/*
+/home/mip/.local/lib/python3.5/site-packages/pip/*
+```
+And the same for python2.
+
+### Jupyter
+
+Installing is now easy as you have pip 19+:
+1) pip3 install jupyter
+2) If you want to access it remotely
+	- `jupyter notebook --generate-config` this generates config file in `/home/<new user>/.jupyter/jupyter_notebook_config.py`
+	- in that config file you have to change and/or uncomment:
+		 - `c.NotebookApp.ip = '0.0.0.0'` so that it listens on all ip addresses
+		 - `c.NotebookApp.port = 8888`
+		 - `c.Notebook.open_browser = False` since you wanna do it remotely it's pointless to have a session starting locally
+	- if you don't want to copy the token every time you should set up a password:
+		 - start python and type in the following
+		 ```
+		 python3
+		 from notebook.auth import passwd
+		 passwd()
+		 ```
+

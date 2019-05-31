@@ -23,19 +23,39 @@ The easiest task:
 4. SD to rPi
 5. Boot up, choose Raspbian (at least the one with Desktop) and wait
 6. Follow the Welcome to Raspberry Pi 'setup' guide
-     - Set Cuntry: leave everything as it is and you will change it afterwards ... they have some problems with it.
+     - Set Cuntry: leave it as it is (my personal preference)
      - Change Password: d00h
      - Set Up Screen: tick the box if you agree
      - Select WiFi Network & Enter WiFi Password: recomended
      - Update Software: yes
+     - Restart
 
-Step by step instruction can be found on [projects.raspberrypi.org](https://projects.raspberrypi.org/en/projects/raspberry-pi-setting-up) if needed...
+Step by step instruction to this point can be found on [projects.raspberrypi.org](https://projects.raspberrypi.org/en/projects/raspberry-pi-setting-up) if needed...
 
-### Change/modify the following
-**password**, hostname, screen size, what you plan on using on the rPi (I2C, SPI, remote GPIO, ...)
+7. rPi Menu > Prefrences > Raspberry Pi Configuration:
+	 - System > Change Hostname: yes!
+	 - System > Boot: To CLI; needed to change the username; after reboot you login in console and can afterwards start the desktop with `startx`
+	 - System > Auto Login: untick
+	 - Interfaces: thick what you need
+	 - Localisation > Locale: here you can change the language, & shit
+	 - Localisation > Timezone: set it
+	 - Localisation > WiFi Country: is it needed?
+	 - OK > Reboot
+
+8. Just to be sure run the following update commands (if everything went as it should those commands won't do a thing, if not they will make sure to update the system)
+     - `sudo apt-get update`
+     - `sudo apt-get upgrade`
+     - `sudo apt-get dist-upgrade`
+     - `sudo apt-get autoremove`
+     - `sudo apt-get autoclean`
 
 ### Change the default `pi` username
-will be done tomorrow
+
+Step by step tuorial by "Dr Beco" from [raspberrypi.stackexchange.com](https://raspberrypi.stackexchange.com/a/68963/52236)
+
+1) While logged in with username `pi` start the terminal and set the password for root account with `sudo passwd root`
+
+
 
 ### Update
 

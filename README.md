@@ -27,6 +27,7 @@ The easiest step: [raspberrypi.org>Downloads>NOOBS](https://www.raspberrypi.org/
 **password**, hostname, screen size, what you plan on using on the rPi (I2C, SPI, remote GPIO, ...)
 
 ### Change the default `pi` username
+will be done tomorrow
 
 ### Update
 

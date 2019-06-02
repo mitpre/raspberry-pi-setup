@@ -104,62 +104,102 @@ That should do it.
 This is nicely decribed on [raspberrypi.org](https://www.raspberrypi.org/documentation/remote-access/ssh/passwordless.md).
 
 
-### Reinstall `pip` and `pip3` to get the most recent version
+### Python
 
-`pip` versions installed with raspberry pi are ancient, therefore run the following (by 'sorin' from [stackoverflow.com](https://stackoverflow.com/a/37531821/3290167))
+USE VIRTUALENV AS THINGS LIKE TO GO HAYWIRE AND THAT WAY THE DEFAULT SETUP IS SAFE. The following was reused/modified from [github.com/kleinee/jns](github.com/kleinee/jns).
+
+1) Installing some prerequisites collected in `python/prep.sh` with `./prep.sh` if it doesn't work, you have to set executable permissions with `chmod +x prep.sh`.
+
 ```
-sudo apt-get remove python-pip python3-pip
-wget https://bootstrap.pypa.io/get-pip.py
-sudo python get-pip.py
-sudo python3 get-pip.py
-rm get-pip.py
+#!/bin/bash
+# script name:     prep.sh
+# last modified:   2019/06/01
+# sudo:            yes
+
+script_name=$(basename -- "$0")
+
+if ! [ $(id -u) = 0 ]; then
+   echo "usage: sudo ./$script_name"
+   exit 1
+fi
+
+printf "\n\ndoing: apt update && apt -y upgrade\n"
+apt update && apt -y upgrade
+printf "\n\ndoing: apt -y install pandoc\n"
+apt -y install pandoc
+printf "\n\ndoing: apt -y install libxml2-dev libxslt-dev\n"
+apt -y install libxml2-dev libxslt-dev
+printf "\n\ndoing: apt -y install libblas-dev liblapack-dev\n"
+apt -y install libblas-dev liblapack-dev
+printf "\n\ndoing: apt -y install libatlas-base-dev gfortran\n"
+apt -y install libatlas-base-dev gfortran
+printf "\n\ndoing: apt -y install libtiff5-dev libjpeg62-turbo-dev\n"
+apt -y install libtiff5-dev libjpeg62-turbo-dev
+printf "\n\ndoing: apt -y install zlib1g-dev libfreetype6-dev liblcms2-dev\n"
+apt -y install zlib1g-dev libfreetype6-dev liblcms2-dev
+printf "\n\ndoing: apt -y install libwebp-dev tcl8.5-dev tk8.5-dev\n"
+apt -y install libwebp-dev tcl8.5-dev tk8.5-dev
+printf "\n\ndoing: apt -y libharfbuzz-dev libfribidi-dev\n"
+apt -y install libharfbuzz-dev libfribidi-dev
+printf "\n\ndoing: apt -y install libhdf5-dev\n"
+apt -y install libhdf5-dev
+printf "\n\ndoing: apt -y install libnetcdf-dev\n"
+apt -y install libnetcdf-dev
+printf "\n\ndoing: apt -y install python3-pip\n"
+apt -y install python3-pip
+printf "\n\ndoing: apt -y install python3-venv\n"
+apt -y install python3-venv
+printf "\n\ndoing: apt -y install libzmq3-dev\n"
+apt -y install libzmq3-dev
+printf "\n\ndoing: apt -y install sqlite3\n"
+apt -y install sqlite3
+```
+
+2) Create an environment with the `python/create_env.sh` with `./create_env.sh` if it doesn't work, you have to set executable permissions with `chmod +x create_env.sh`.
+
+```
+#!/bin/bash
+# script name:     create_env.sh
+# last modified:   2019/06/01
+# sudo: no
+
+script_name=$(basename -- "$0")
+
+usr=$(whoami)
+
+read -p 'Name of the Virual Environment: ' venvname
+
+env="/home/${usr}/.venv/${venvname}"
+
+if [ $(id -u) = 0 ]
+then
+   echo "usage: ./$script_name"
+   exit 1
+fi
+
+if [ ! -d "$venv" ]; then
+  python3 -m venv $env
+fi
+
+# activate virtual environment
+source $env/bin/activate
+
+pip3 install pip==9.0.0
+pip3 install setuptools
+
+# upgrades pip to version 19+
 pip3 install --upgrade pip
-pip install --upgrade pip
 ```
+### Node/NodeJS/npm
 
-If you only use `pip install --upgrade pip` and `pip3 install --upgrade pip` you end up in a fucked up situation. Then you have to remove the following:
-```
-/home/mip/.local/bin/pip
-/home/mip/.local/bin/pip3
-/home/mip/.local/bin/pip3.5
-/home/mip/.local/lib/python3.5/site-packages/pip-19.1.1.dist-info/*
-/home/mip/.local/lib/python3.5/site-packages/pip/*
-```
-And the same for python2.
+[https://github.com/nodesource/distributions](https://github.com/nodesource/distributions)
 
 ### Jupyter
 
-Installing is now easy as you have pip 19+:
-1) sudo pip3 install jupyter
-2) If you want to access it remotely
-	- `jupyter notebook --generate-config` this generates config file in `/home/<new user>/.jupyter/jupyter_notebook_config.py`
-	- in that config file you have to change and/or uncomment:
-		 - `c.NotebookApp.ip = '0.0.0.0'` so that it listens on all ip addresses
-		 - `c.NotebookApp.port = 8888`
-		 - `c.Notebook.open_browser = False` since you wanna do it remotely it's pointless to have a session starting locally
-	- if you don't want to copy the token every time you should set up a password:
-		 - start python and type in the following
-		 ```
-		 python3
-		 from notebook.auth import passwd
-		 passwd()
-		 ```
-		 - enter the desired password
-		 - copy the result to `c.NotebookApp.password = u'<returned value>'`
+The following was reused/modified from [github.com/kleinee/jns](github.com/kleinee/jns).
 
-	- create a service to start at boot by putting `jupyter.service` to `/lib/systemd/system/` folder
-	- then run
-	```
-	sudo chmod 644 /lib/systemd/system/jupyter.service
-	sudo systemctl daemon-reload
-	sudo systemctl enable jupyter.service
-	sudo systemctl restart jupyter.service
-	sudo reboot
-	```
-
-The status of the service can be checked with `systemctl status jupyter.service`.
-
-At one point it would be better to just follow the instructions from [https://github.com/kleinee/jns](https://github.com/kleinee/jns).
+1) If you didn't already run the first step from Python chapter, and the complete Node/NodeJS/npm chapter (without the latter jupyter lab will most likely fail).
+2) 
 
 ### Shut down command without timeout
 

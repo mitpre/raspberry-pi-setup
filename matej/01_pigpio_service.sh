@@ -22,15 +22,14 @@ source ${env}/bin/activate
 pigpiod -n localhost
 ONE
 
-cat << TWO | sudo tee /etc/systemd/system/pigpio.service
+cat << TWO | sudo tee /etc/systemd/system/pigpiodaemon.service
 [Unit]
-Description=pigpio
+Description=Daemon required to control GPIO pins via pigpio
 
 [Service]
-Type=simple
-ExecStart=/bin/bash -c "/home/${usr}/pigpio_daemon_start.sh"
-User=mip
-Group=mip
+ExecStart=/usr/bin/pigpiod -l -n localhost -p 9999
+ExecStop=/bin/systemctl kill pigpiod
+Type=forking
 
 [Install]
 WantedBy=multi-user.target
@@ -38,5 +37,5 @@ TWO
 
 # start jupyter
 systemctl daemon-reload
-systemctl enable pigpio.service
-systemctl start pigpio.service
+systemctl enable pigpiodaemon.service
+systemctl start pigpiodaemon.service

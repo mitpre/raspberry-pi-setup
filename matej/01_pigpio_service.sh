@@ -28,7 +28,7 @@ Description=pigpio
 
 [Service]
 Type=simple
-ExecStart=/usr/bin/pigpiod -n localhost
+ExecStart=/bin/bash -c "/home/${usr}/pigpio_daemon_start.sh"
 User=mip
 Group=mip
 

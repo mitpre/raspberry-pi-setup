@@ -15,7 +15,7 @@ then
 fi
 
 . ~/.bashrc
-. $env/bin/activate
+source $env/bin/activate
 jupyter lab clean
 jupyter labextension install @jupyter-widgets/jupyterlab-manager --no-build
 jupyter labextension install bqplot --no-build

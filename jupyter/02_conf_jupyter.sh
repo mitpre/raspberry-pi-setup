@@ -80,5 +80,5 @@ if which node > /dev/null
 fi
 
 # install jupyter lab extensions
-bash -i ./inst_lab_ext.sh
+bash -i ./03_inst_lab_ext.sh
 

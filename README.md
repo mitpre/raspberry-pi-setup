@@ -39,6 +39,9 @@ Solution by "tjklemz" from [apple.stackexchange.com](https://apple.stackexchange
 Step by step tuorial by "Dr Beco" from [raspberrypi.stackexchange.com](https://raspberrypi.stackexchange.com/a/68963/52236) (summed up here). Worth to take a look also [here](https://raspberrypi.stackexchange.com/questions/7133/how-to-change-user-pi-sudo-permissions-how-to-add-other-accounts-with-different).
 
 1) While logged in with user `pi` start the terminal and set the password for the root account with `sudo passwd root`
+	- (headless) `sudo nano /etc/ssh/sshd_config`
+	- (headless) comment out the following line `PermitRootLogin without-password`
+	- (headless) add the following line `PermitRootLogin yes`; for this to work straight away you can just restart the ssh service by `/etc/init.d/ssh restart`
 2) Reboot: `sudo reboot`
 3) Login with user `root`
 4) Check with `ps -u pi` to see an empty list; no processes owned by user `pi`
@@ -63,7 +66,8 @@ Step by step tuorial by "Dr Beco" from [raspberrypi.stackexchange.com](https://r
 	 - change the content of `010_<new user>-passwd` from `pi ALL=(ALL) NOPASSWD: ALL` to `<new user> ALL=(ALL) PASSWD: ALL`
 14) Reboot: `sudo reboot`
 15) login as `<new user>` and delete `root` account with:
-	 - `sudo passwd -l root`
+	- `sudo passwd -l root`
+	- (headless) remove the root ssh access by redoing headless steps under 1.
 16) Get the graphical interface with `startx` and you can set up the login to Desktop if needed, but I would still not use auto login.
 
 ### Setting a static IP

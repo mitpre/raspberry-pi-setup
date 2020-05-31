@@ -15,24 +15,16 @@ Solution by "tjklemz" from [apple.stackexchange.com](https://apple.stackexchange
     - `FAT32` partition type supported by rPi
     - `MBRFormat` Master Boot Record
 
-### Installing the *NOOBS* software
-The easiest task:
-1. Download [raspberrypi.org>Downloads>NOOBS](https://www.raspberrypi.org/downloads/noobs/)
-2. Extract
-3. Place the files to the root of the SD card that you formatted in the previous step.
-4. SD to rPi
-5. Boot up, choose Raspbian (at least the one with Desktop) and wait
-6. Follow the Welcome to Raspberry Pi 'setup' guide
-     - Set Cuntry: leave it as it is (my personal preference)
-     - Change Password: d00h
-     - Set Up Screen: tick the box if you agree
-     - Select WiFi Network & Enter WiFi Password: recomended
-     - Update Software: yes
-     - Restart
+### Installing the Raspbian
+1. Download the latest Raspbian for Raspberry Pi then follow [projects.raspberrypi.org](https://www.raspberrypi.org/documentation/installation/installing-images/mac.md)
 
-Step by step instruction to this point can be found on [projects.raspberrypi.org](https://projects.raspberrypi.org/en/projects/raspberry-pi-setting-up) if needed...
+2. (headless configuration) Create an empty file called "ssh" on the boot partition of the SD card to enable SSH
 
-7. rPi Menu > Prefrences > Raspberry Pi Configuration:
+3. (headless configuration) enable wifi: [raspberrypi.org](https://www.raspberrypi.org/documentation/configuration/wireless/headless.md) 
+
+4. boot
+
+5. rPi Menu > Prefrences > Raspberry Pi Configuration:
 	 - System > Change Hostname: yes!
 	 - System > Boot: To CLI; needed to change the user; after reboot you login in console and can afterwards start the desktop with `startx`
 	 - System > Auto Login: untick
@@ -41,13 +33,6 @@ Step by step instruction to this point can be found on [projects.raspberrypi.org
 	 - Localisation > Timezone: set it
 	 - Localisation > WiFi Country: is it needed?
 	 - OK > Reboot
-
-8. Just to be sure run the following update commands (if everything went as it should those commands won't do a thing, if not they will make sure to update the system)
-     - `sudo apt-get update`
-     - `sudo apt-get upgrade`
-     - `sudo apt-get dist-upgrade`
-     - `sudo apt-get autoremove`
-     - `sudo apt-get autoclean`
 
 ### Change the default `pi` user
 

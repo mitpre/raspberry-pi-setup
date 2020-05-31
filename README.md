@@ -99,7 +99,9 @@ Newer Raspbians already have Python3 therefore I suggest you only use `virtualen
 
 ### Node/NodeJS/npm
 
-[https://github.com/nodesource/distributions](https://github.com/nodesource/distributions)
+- [https://github.com/nodesource/distributions](https://github.com/nodesource/distributions)
+- for rPi Zero you should follow: https://desertbot.io/blog/nodejs-git-and-pm2-headless-raspberry-pi-install
+
 
 ### Jupyter
 

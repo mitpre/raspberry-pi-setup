@@ -38,6 +38,8 @@ Solution by "tjklemz" from [apple.stackexchange.com](https://apple.stackexchange
 
 Step by step tuorial by "Dr Beco" from [raspberrypi.stackexchange.com](https://raspberrypi.stackexchange.com/a/68963/52236) (summed up here). Worth to take a look also [here](https://raspberrypi.stackexchange.com/questions/7133/how-to-change-user-pi-sudo-permissions-how-to-add-other-accounts-with-different).
 
+0) If you need VNC you enable it in `sudo raspi-config > Interfacing Options > VNC`, and you change the resolution in `sudo raspi-config > Advanced Options > Resolution`.
+
 1) While logged in with user `pi` start the terminal and set the password for the root account with `sudo passwd root`
 	- (headless) `sudo nano /etc/ssh/sshd_config`
 	- (headless) comment out the following line `PermitRootLogin without-password`

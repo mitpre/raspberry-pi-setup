@@ -32,14 +32,14 @@ echo 'eval "$(register-python-argcomplete pipx)"' > /home/${usr}/.bashrc
 
 
 source /home/${usr}/.bashrc
-cp /home/${usr}/.bashrc /home/${usr}/.bashrc1
+cp /home/${usr}/.bashrc /home/${usr}/.bashrc2
 
 
 echo -e "${GREEN}Install 'virtualenv'${NC}"
 pipx install virtualenv
 
 source /home/${usr}/.bashrc
-cp /home/${usr}/.bashrc /home/${usr}/.bashrc1
+cp /home/${usr}/.bashrc /home/${usr}/.bashrc3
 
 
 echo -e "${GREEN}Install 'Node.js'${NC}"
@@ -47,7 +47,7 @@ curl -L https://bit.ly/n-install | bash -s -- -y lts
 
 
 source /home/${usr}/.bashrc
-cp /home/${usr}/.bashrc /home/${usr}/.bashrc1
+cp /home/${usr}/.bashrc /home/${usr}/.bashrc4
 
 
 echo -e "${GREEN}Install 'pigpio'${NC}"

@@ -12,7 +12,7 @@ if ! [ $(id -u) = 0 ]; then
 fi
 
 if [ $SUDO_USER ]; then usr=$SUDO_USER; else usr=`whoami`; fi
-env="/home/${usr}/.venv/jns"
+env="/home/${usr}/.venv/jupyter"
 
 
 # create jupyter.sh in /home/<user> and make it executable

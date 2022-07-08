@@ -6,7 +6,7 @@
 script_name=$(basename -- "$0")
 
 if [ $SUDO_USER ]; then usr=$SUDO_USER; else usr=`whoami`; fi
-env="/home/${usr}/.venv/jns"
+env="/home/${usr}/.venv/jupyter"
 
 # i think this never worked
 #read -sp 'Enter a desired password for jupyter: ' pass_str
@@ -63,7 +63,7 @@ jupyter nbextension enable --py widgetsnbextension --sys-prefix
 jupyter nbextension enable --py --sys-prefix bqplot
 
 # activate clusters tab in notebook interface
-/home/${usr}/.venv/jns/bin/ipcluster nbextension enable --user
+/home/${usr}/.venv/jupyter/bin/ipcluster nbextension enable --user
 
 # install nodejs and node version manager n
 # if node is not yet installed

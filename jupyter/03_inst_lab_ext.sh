@@ -6,7 +6,7 @@
 script_name=$(basename -- "$0")
 
 if [ $SUDO_USER ]; then usr=$SUDO_USER; else usr=`whoami`; fi
-env="/home/${usr}/.venv/jns"
+env="/home/${usr}/.venv/jupyter"
 
 if [ $(id -u) = 0 ]
 then

@@ -1,6 +1,6 @@
 #!/bin/bash
 # script name:     inst_stack.sh
-# last modified:   2019/06/01
+# last modified:   2022/07/08
 # sudo: no
 
 script_name=$(basename -- "$0")
@@ -15,21 +15,19 @@ then
 fi
 
 if [ ! -d "$venv" ]; then
-  python3 -m venv $env
+  virtualenv $env
 fi
 
 # activate virtual environment
 source $env/bin/activate
 
-pip3 install pip==9.0.0
-pip3 install setuptools
-pip3 install --upgrade pip
+pip install --upgrade pip
 
-pip3 install jupyter jupyter-core jupyterlab ipykernel ipyparallel
-pip3 install matplotlib
-pip3 install numpy
-pip3 install bqplot
-pip3 install bash_kernel
+pip install jupyter jupyter-core jupyterlab ipykernel ipyparallel
+pip install matplotlib
+pip install numpy
+pip install bqplot
+pip install bash_kernel
 
 # if you have some spcific requirements you can put them in the requirements.txt with versions etc ...
-# cat requirements.txt | xargs -n 1 pip3 install
+# cat requirements.txt | xargs -n 1 pip install

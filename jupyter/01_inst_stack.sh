@@ -3,6 +3,10 @@
 # last modified:   2022/07/08
 # sudo: no
 
+RED='\033[0;31m'
+GREEN='\033[0;33m'
+NC='\033[0m' # No Color
+
 script_name=$(basename -- "$0")
 
 if [ $SUDO_USER ]; then usr=$SUDO_USER; else usr=`whoami`; fi
@@ -14,8 +18,12 @@ then
    exit 1
 fi
 
-if [ ! -d "$venv" ]; then
+env="/home/${usr}/.venv/jupyter"
+if [ ! -d "$env" ]; then
+   echo -e "${GREEN}Create virtual environment for 'jupyter'${NC}"
   virtualenv $env
+else
+   echo -e "${GREEN}'jupyter' virtual environment already exists${NC}"
 fi
 
 # activate virtual environment

@@ -65,21 +65,6 @@ jupyter nbextension enable --py --sys-prefix bqplot
 # activate clusters tab in notebook interface
 /home/${usr}/.venv/jupyter/bin/ipcluster nbextension enable --user
 
-# install nodejs and node version manager n
-# if node is not yet installed
-if which node > /dev/null
-    then
-        echo "node is installed, skipping..."
-    else
-        # install nodejs and node version manager n
-        mkdir ~/node
-        cd ~/node
-        # fix for issue #22
-        # install nodejs and node version manager n
-        # see: https://github.com/mklement0/n-install
-        curl -L https://git.io/n-install | bash -s -- -y lts
-fi
-
 # install jupyter lab extensions
 bash -i ./03_inst_lab_ext.sh
 

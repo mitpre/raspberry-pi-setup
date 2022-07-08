@@ -14,7 +14,7 @@ then
    exit 1
 fi
 
-. ~/.bashrc
+source /home/${usr}/.bashrc
 source $env/bin/activate
 jupyter lab clean
 jupyter labextension install @jupyter-widgets/jupyterlab-manager --no-build

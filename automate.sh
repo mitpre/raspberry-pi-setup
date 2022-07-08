@@ -43,6 +43,7 @@ if [ ! -d "$env" ]; then
 else
    echo -e "${GREEN}'jupyter' virtual environment already exists${NC}"
 fi
+
 env="/home/${usr}/.venv/shades"
 if [ ! -d "$env" ]; then
    echo -e "${GREEN}Create virtual environment for 'shades'${NC}"

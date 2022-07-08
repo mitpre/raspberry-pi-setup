@@ -8,8 +8,9 @@ script_name=$(basename -- "$0")
 if [ $SUDO_USER ]; then usr=$SUDO_USER; else usr=`whoami`; fi
 env="/home/${usr}/.venv/jns"
 
-read -sp 'Enter a desired password for jupyter: ' pass_str
-sha1=$(echo -n $pass_str | tr -d '\n' | sha1sum | awk '{ print $1 }')
+# i think this never worked
+#read -sp 'Enter a desired password for jupyter: ' pass_str
+#sha1=$(echo -n $pass_str | tr -d '\n' | sha1sum | awk '{ print $1 }')
 
 if [ $(id -u) = 0 ]
 then
@@ -37,8 +38,8 @@ arr+=(["$app.open_browser"]="$app.open_browser = False")
 arr+=(["$app.ip"]="$app.ip = '0.0.0.0'")
 arr+=(["$app.port"]="$app.port = 8888")
 arr+=(["$app.enable_mathjax"]="$app.enable_mathjax = True")
-arr+=(["$app.notebook_dir"]="$app.notebook_dir = \"/home/${usr}/Notebooks\"")
-arr+=(["$app.password"]="$app.password = \"sha1:${sha1}\"")
+#arr+=(["$app.notebook_dir"]="$app.notebook_dir = \"/home/${usr}/Notebooks\"")
+#arr+=(["$app.password"]="$app.password = \"sha1:${sha1}\"")
 arr+=(["$app.allow_remote_access"]="$app.allow_remote_access = True")
 
 # apply changes to jupyter_notebook_config.py

@@ -1,6 +1,6 @@
 #!/bin/bash
 # script name:     conf_service.sh
-# last modified:   2018/08/12
+# last modified:   2022/07/08
 # credits:         mt08xx
 # sudo:            yes
 
@@ -20,7 +20,6 @@ cat << ONE > /home/${usr}/jupyter_start.sh && chmod a+x /home/${usr}/jupyter_sta
 #!/bin/bash
 source ${env}/bin/activate
 jupyter lab
-#jupyter notebook
 ONE
 
 cat << TWO | sudo tee /etc/systemd/system/jupyter.service
@@ -32,7 +31,7 @@ Type=simple
 ExecStart=/bin/bash -c "/home/${usr}/jupyter_start.sh"
 User=${usr}
 Group=${usr}
-WorkingDirectory=/home/${usr}/Notebooks
+WorkingDirectory=/home/${usr}
 Restart=always
 RestartSec=10
 

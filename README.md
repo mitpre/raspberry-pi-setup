@@ -22,15 +22,15 @@ Collection of steps to set up a fresh rPi.
 4. Set the passwordless SSH acces. Nicely decribed on [raspberrypi.org](https://www.raspberrypi.com/documentation/computers/remote-access.html#passwordless-ssh-access).
 
 5. Python is already nicely supported by newer version, but use `virtualenv` so that you don't f*ck up the system version.
-         - Install `pipx` [Documentation](https://pypa.github.io/pipx/)
-	   `python3 -m pip install --user pipx`
-	   `python3 -m pipx ensurepath`
-	   `pipx completions`
-	 - Install `virtualenv` [Documentation](https://virtualenv.pypa.io/)
-	   `pipx install virtualenv`
-	 - Install `pigpio` [Documentation](https://abyz.me.uk/rpi/pigpio/download.html)
-	   `sudo apt-get update`
-	   `sudo apt-get install pigpio python3-pigpio`
+	- Install `pipx` [Documentation](https://pypa.github.io/pipx/)
+		- `python3 -m pip install --user pipx`
+		- `python3 -m pipx ensurepath`
+		- `pipx completions`
+	- Install `virtualenv` [Documentation](https://virtualenv.pypa.io/)
+		- `pipx install virtualenv`
+	- Install `pigpio` [Documentation](https://abyz.me.uk/rpi/pigpio/download.html)
+		- `sudo apt-get update`
+		- `sudo apt-get install pigpio python3-pigpio`
 
 ### Setting a static IP (might still be needed)
 
@@ -51,11 +51,6 @@ static domain_name_servers=<DNS server> 8.8.8.8 fd51:42f8:caae:d92e::1
 That should do it.
 
 
-
-
-### Python
-
-Newer Raspbians already have Python3 therefore I suggest you only use `virtualenv`to not fuck up the system versions ... (install with `sudo pip3 install virtualenv`)
 
 ### Node/NodeJS/npm
 

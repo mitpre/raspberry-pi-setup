@@ -2,18 +2,29 @@
 
 Collection of steps to set up a fresh rPi.
 
-### System setup
+### Formatting a Raspbian SD card on MacOS can be a pain in the ass
+Solution by "tjklemz" from [apple.stackexchange.com](https://apple.stackexchange.com/a/329075/334048)
 
-1. Use Raspberry Pi OS (https://www.raspberrypi.com/software/)
-2. With settings (bottom right icon) set the following:
-    - pi's name,
-    - enable ssh,
-    - user name and password, and
-    - configure wifi
+1. find the card by `diskutil list`; identifiers are `disk0`, `disk1`, ...
+!**do not accidentaly write the wrong identifier in the following steps**!
+2. (OPTIONAL) completely remove the data from the card by the following commands
+    - unmount: `diskutil unmountDisk <identifier>`
+    - zero out the disk (option 1): `diskutil zeroDisk <identifier>`
+    - random out the disk (option 2): `diskutil randomDisk <identifier>`
+3. formatting the disk by `diskutil eraseDisk FAT32 <CAPITAL NAME OF THE CARD> MBRFormat <identifier>` (unmounting/mounting is handled automatically by `diskutil`)
+    - `FAT32` partition type supported by rPi
+    - `MBRFormat` Master Boot Record
 
-   Now everything is ready for boot. 
+### Installing the Raspbian
+1. Download the latest Raspbian for Raspberry Pi then follow [projects.raspberrypi.org](https://www.raspberrypi.org/documentation/installation/installing-images/mac.md)
 
-3. rPi Menu > Prefrences > Raspberry Pi Configuration:
+2. (headless configuration) Create an empty file called "ssh" on the boot partition of the SD card to enable SSH
+
+3. (headless configuration) enable wifi: [raspberrypi.org](https://www.raspberrypi.org/documentation/configuration/wireless/headless.md) 
+
+4. boot
+
+5. rPi Menu > Prefrences > Raspberry Pi Configuration:
 	 - System > Change Hostname: yes!
 	 - System > Boot: To CLI; needed to change the user; after reboot you login in console and can afterwards start the desktop with `startx`
 	 - System > Auto Login: untick

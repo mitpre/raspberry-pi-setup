@@ -8,6 +8,7 @@ Collection of steps to set up a fresh rPi.
 2. With settings (bottom right icon) set the following:
     - pi's name (i.e., rPi),
     - enable ssh,
+    - enable keyd login; you need to have public key generated on your machine --> this makes step 4. obsolete.
     - user name (i.e., rPi) and password, and
     - configure wifi
 

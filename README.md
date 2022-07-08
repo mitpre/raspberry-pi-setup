@@ -8,6 +8,7 @@ Collection of steps to set up a fresh rPi.
 2. With settings (bottom right icon) set the following:
     - pi's name (i.e., rPi),
     - enable ssh,
+    - enable keyd login; you need to have public key generated on your machine --> this makes step 4. obsolete.
     - user name (i.e., rPi) and password, and
     - configure wifi
 
@@ -21,7 +22,9 @@ Collection of steps to set up a fresh rPi.
 	 
 4. Set the passwordless SSH acces. Nicely decribed on [raspberrypi.org](https://www.raspberrypi.com/documentation/computers/remote-access.html#passwordless-ssh-access).
 
-5. Python is already nicely supported by newer version, but use `virtualenv` so that you don't f*ck up the system version.
+5. Run `automate.sh` that performs everything from steps 6., 7. and 8.
+
+6. Python is already nicely supported by newer version, but use `virtualenv` so that you don't f*ck up the system version.
 	- Install `pipx` [Documentation](https://pypa.github.io/pipx/)
 		- `python3 -m pip install --upgrade pip`
 		- `python3 -m pip install --user pipx`
@@ -30,15 +33,15 @@ Collection of steps to set up a fresh rPi.
 	- Install `virtualenv` [Documentation](https://virtualenv.pypa.io/)
 		- `pipx install virtualenv`
 		
-6. Node.js; [Instructions](https://github.com/mklement0/n-install)
+7. Node.js; [Instructions](https://github.com/mklement0/n-install)
 	- `curl -L https://bit.ly/n-install | bash -s -- -y lts`
 
-7. Install `pigpio` [Documentation](https://abyz.me.uk/rpi/pigpio/download.html)
+8. Install `pigpio` [Documentation](https://abyz.me.uk/rpi/pigpio/download.html)
 	- `sudo apt-get install pigpio python3-pigpio`
 
-8. Run scripts in Python folder
-
 9. Run scripts in Jupyter
+
+10. Run script in GPIO
 
 ### Setting a static IP (might still be needed)
 

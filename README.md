@@ -23,14 +23,22 @@ Collection of steps to set up a fresh rPi.
 
 5. Python is already nicely supported by newer version, but use `virtualenv` so that you don't f*ck up the system version.
 	- Install `pipx` [Documentation](https://pypa.github.io/pipx/)
+		- `python3 -m pip install --upgrade pip`
 		- `python3 -m pip install --user pipx`
 		- `python3 -m pipx ensurepath`
 		- `pipx completions`
 	- Install `virtualenv` [Documentation](https://virtualenv.pypa.io/)
 		- `pipx install virtualenv`
-	- Install `pigpio` [Documentation](https://abyz.me.uk/rpi/pigpio/download.html)
-		- `sudo apt-get update`
-		- `sudo apt-get install pigpio python3-pigpio`
+		
+6. Node.js; [Instructions](https://github.com/mklement0/n-install)
+	- `curl -L https://bit.ly/n-install | bash -s -- -y lts`
+
+7. Install `pigpio` [Documentation](https://abyz.me.uk/rpi/pigpio/download.html)
+	- `sudo apt-get install pigpio python3-pigpio`
+
+8. Run scripts in Python folder
+
+9. Run scripts in Jupyter
 
 ### Setting a static IP (might still be needed)
 
@@ -49,21 +57,6 @@ static routers=<router address/gateway>
 static domain_name_servers=<DNS server> 8.8.8.8 fd51:42f8:caae:d92e::1
 ```
 That should do it.
-
-
-
-### Node/NodeJS/npm
-
-- [https://github.com/nodesource/distributions](https://github.com/nodesource/distributions)
-- for rPi Zero you should follow: https://desertbot.io/blog/nodejs-git-and-pm2-headless-raspberry-pi-install
-
-
-### Jupyter
-
-The following was reused/modified from [github.com/kleinee/jns](github.com/kleinee/jns).
-
-1) If you didn't already run the first step from Python chapter, and the complete Node/NodeJS/npm chapter (without the latter jupyter lab will most likely fail).
-2) 
 
 ### Shut down command without timeout
 

@@ -10,7 +10,8 @@ sudo apt-get install pigpio python3-pigpio
 env="/home/${usr}/.venv/jupyter"
 if [ ! -d "$env" ]; then
    echo -e "${GREEN}Create virtual environment for 'jupyter'${NC}"
-  virtualenv $env
+   echo -e "    ${GREEN}at '$env'${NC}"
+   virtualenv $env
 else
    echo -e "${GREEN}'jupyter' virtual environment already exists${NC}"
 fi
@@ -18,7 +19,8 @@ fi
 env="/home/${usr}/.venv/shades"
 if [ ! -d "$env" ]; then
    echo -e "${GREEN}Create virtual environment for 'shades'${NC}"
-  virtualenv $env
+   echo -e "    ${GREEN}at '$env'${NC}"
+   virtualenv $env
 else
    echo -e "${GREEN}'shades' virtual environment already exists${NC}"
 fi

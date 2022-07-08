@@ -74,5 +74,5 @@ jupyter nbextension enable --py --sys-prefix bqplot
 /home/${usr}/.venv/jupyter/bin/ipcluster nbextension enable --user
 
 # install jupyter lab extensions
-bash -i ./03_inst_lab_ext.sh
+bash -i ./03_install_lab_ext.sh
 

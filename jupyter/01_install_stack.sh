@@ -34,14 +34,14 @@ pip install --upgrade pip
 
 echo -e "${GREEN}Installing: 'jupyter jupyter-core jupyterlab ipykernel ipyparallel' ${NC}"
 pip install jupyter jupyter-core jupyterlab ipykernel ipyparallel
-echo -e "${GREEN}Installing: 'matplotlib' ${NC}"
-pip install matplotlib
-echo -e "${GREEN}Installing: 'numpy' ${NC}"
-pip install numpy
-echo -e "${GREEN}Installing: 'bqplot' ${NC}"
-pip install bqplot
-echo -e "${GREEN}Installing: 'bash_kernel' ${NC}"
-pip install bash_kernel
+#echo -e "${GREEN}Installing: 'matplotlib' ${NC}"
+#pip install matplotlib
+#echo -e "${GREEN}Installing: 'numpy' ${NC}"
+#pip install numpy
+#echo -e "${GREEN}Installing: 'bqplot' ${NC}"
+#pip install bqplot
+#echo -e "${GREEN}Installing: 'bash_kernel' ${NC}"
+#pip install bash_kernel
 
 # if you have some spcific requirements you can put them in the requirements.txt with versions etc ...
 # cat requirements.txt | xargs -n 1 pip install

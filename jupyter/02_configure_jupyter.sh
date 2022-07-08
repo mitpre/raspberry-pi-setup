@@ -3,6 +3,10 @@
 # last modified:   2018/09/23
 # sudo:            no
 
+RED='\033[0;31m'
+GREEN='\033[0;33m'
+NC='\033[0m' # No Color
+
 script_name=$(basename -- "$0")
 
 if [ $SUDO_USER ]; then usr=$SUDO_USER; else usr=`whoami`; fi
@@ -19,15 +23,17 @@ then
 fi
 
 # activate virtual environment
+echo -e "${GREEN}Activating 'jupyter' virtual environment ${NC}"
 source $env/bin/activate
 
 # generate config and create notebook directory
 # if Notebook directory exists, we keep it (-p)
 # if configuration file exeists, we overwrite it (-y)
 
+echo -e "${GREEN}Generating config file${NC}"
 jupyter notebook -y --generate-config
 cd $HOME
-mkdir -p Notebooks
+#mkdir -p Notebooks
 
 target=~/.jupyter/jupyter_notebook_config.py
 
@@ -55,9 +61,11 @@ for key in ${!arr[@]};do
 done
 
 # install bash kernel
-python3 -m bash_kernel.install
+echo -e "${GREEN}Running: 'bash_kernel.install' ${NC}"
+python -m bash_kernel.install
 
 # install extensions
+echo -e "${GREEN}Installing: jupyter extensions ${NC}"
 jupyter serverextension enable --py jupyterlab
 jupyter nbextension enable --py widgetsnbextension --sys-prefix
 jupyter nbextension enable --py --sys-prefix bqplot

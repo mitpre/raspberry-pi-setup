@@ -24,7 +24,7 @@ env="/home/${usr}/.venv/jupyter"
 cat << ONE > /home/${usr}/jupyter_start.sh && chmod a+x /home/${usr}/jupyter_start.sh
 #!/bin/bash
 source ${env}/bin/activate
-jupyter lab
+jupyter lab --ip="0.0.0.0" --no-browser
 ONE
 
 cat << TWO | sudo tee /etc/systemd/system/jupyter.service

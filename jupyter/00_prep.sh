@@ -10,8 +10,6 @@ if ! [ $(id -u) = 0 ]; then
    exit 1
 fi
 
-printf "\n\ndoing: apt update && apt -y upgrade\n"
-apt update && apt -y upgrade
 printf "\n\ndoing: apt -y install pandoc\n"
 apt -y install pandoc
 printf "\n\ndoing: apt -y install libxml2-dev libxslt-dev\n"

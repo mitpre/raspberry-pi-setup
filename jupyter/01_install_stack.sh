@@ -21,7 +21,7 @@ fi
 env="/home/${usr}/.venv/jupyter"
 if [ ! -d "$env" ]; then
    echo -e "${GREEN}Create virtual environment for 'jupyter'${NC}"
-  virtualenv $env
+   virtualenv $env
 else
    echo -e "${GREEN}'jupyter' virtual environment already exists${NC}"
 fi

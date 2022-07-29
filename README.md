@@ -43,6 +43,8 @@ Collection of steps to set up a fresh rPi.
 
 ### Setting a static IP (might still be needed)
 
+Lower instructions are still up-to-date, however, it is best to check the actual state at [raspberry pi documentation](https://www.raspberrypi.com/documentation/computers/configuration.html#the-dhcp-daemon).
+
 The following steps can be used to set a static IP on rPi. Follow it only if you cannot reserve a static IP for rPi on your router. The instructions are based on the "Milliways" answer from [raspberrypi.stackexchange.com](https://raspberrypi.stackexchange.com/a/74428/52236)
 1. PREREQUISITES:
      - the IP that you want to set and the network size: `ip -4 addr show | grep global` command returns <current ip>/<network size> for all global connections on rPi.

@@ -60,6 +60,10 @@ static routers=<router address/gateway>
 static domain_name_servers=<DNS server> 8.8.8.8 fd51:42f8:caae:d92e::1
 ```
 That should do it.
+	
+### Changing SSH port
+	
+If you are opening the Pi to the public, it might be good to change the default SSH port. You do this by `sudo nano /etc/ssh/sshd_config` and you change `#Port 22` --> `Port <desired port>`.
 
 ### Shut down command without timeout
 

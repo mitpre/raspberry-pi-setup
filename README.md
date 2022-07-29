@@ -64,6 +64,16 @@ That should do it.
 ### Changing SSH port
 	
 If you are opening the Pi to the public, it might be good to change the default SSH port. You do this by `sudo nano /etc/ssh/sshd_config` and you change `#Port 22` --> `Port <desired port>` (notice the removed `#`). Afterwards, you either reboot or `sudo service ssh restart`. The appropriate `ssh` command is now `ssh -p <desired port> <user>@<pi>`.
+	
+### Uncomplicated FireWall
+	
+If you are opening the Pi to the public, it might be good to install firewall and lock the ports. For this you can go to `iptables` and complicate your life, or use Uncomplicated FireWall. Here the latter is shown.
+	- `sudo apt install ufw`
+	- `sudo ufw <allow or deny> <port>` ... that's how you allow/deny access to the port, i.e., `<desired port>` from above for `ssh` or the default one at `22`.
+	- `sudo ufw limit <port>` ... sets some limitation on how may attempts can be made etc ...
+	- `sudo ufw show added` ... to check the added rulles before enabling.
+	- `sudo ufw enable` ... enables the firewall.
+	- `sudo ufw status` ... shows the status.
 
 ### Shut down command without timeout
 

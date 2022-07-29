@@ -68,9 +68,15 @@ If you are opening the Pi to the public, it might be good to change the default 
 ### Uncomplicated FireWall
 	
 If you are opening the Pi to the public, it might be good to install firewall and lock the ports. For this you can go to `iptables` and complicate your life, or use Uncomplicated FireWall. Here the latter is shown:
-     * the IP that you want to set and the network size: `ip -4 addr show | grep global` command returns <current ip>/<network size> for all global connections on rPi.
-     * router address/gateway: `ip route | grep default | awk '{print $3}'`
-     * DNS server: `cat /etc/resolv.conf`
+- `sudo apt install ufw`
+- `sudo ufw allow <port>`
+- `sudo ufw deny <port>`
+- `sudo ufw limit <port>` ... limits how many connections can be made, if to many attempts it can block.
+- `sudo ufw show added`   ... this is to check the rulles before starting the UFW
+- `sudo ufw enable`
+- `sudo ufw status`
+	
+Before you enable the service you should at least allow the `ssh` port!
 
 ### Shut down command without timeout
 

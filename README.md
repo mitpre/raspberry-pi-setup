@@ -63,7 +63,7 @@ That should do it.
 	
 ### Changing SSH port
 	
-If you are opening the Pi to the public, it might be good to change the default SSH port. You do this by `sudo nano /etc/ssh/sshd_config` and you change `#Port 22` --> `Port <desired port>` (notice the removed `#`). The `ssh` command is then `ssh -p <desired port> <user>@<pi>`.
+If you are opening the Pi to the public, it might be good to change the default SSH port. You do this by `sudo nano /etc/ssh/sshd_config` and you change `#Port 22` --> `Port <desired port>` (notice the removed `#`). Afterwards, you either reboot or `sudo service ssh restart`. The appropriate `ssh` command is now `ssh -p <desired port> <user>@<pi>`.
 
 ### Shut down command without timeout
 

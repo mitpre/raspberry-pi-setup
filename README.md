@@ -82,15 +82,22 @@ Before you enable the service you should at least allow the `ssh` port!
 
 You should follow the instructions for ssh access [here](https://developers.cloudflare.com/cloudflare-one/tutorials/ssh). <b>The only thing that should be different is the installation!</b> Normally you would install it through their [CF Package Repository](https://pkg.cloudflare.com/#debian-title), but because Debian 11 Bullseye is not yet officially supported, I followed [Pi Hole](https://docs.pi-hole.net/guides/dns/cloudflared/#armhf-architecture-32-bit-raspberry-pi) instructions.
 	
-- Side remark: When creating a service, the `sudo cloudflared service install` command might fail with
+- Side remark: When creating a service, the `sudo cloudflared service install` command might fail with ```Cannot determine default configuration path. No file [config.yml config.yaml] in [~/.cloudflared ~/.cloudflare-warp ~/cloudflare-warp /etc/cloudflared /usr/local/etc/cloudflared]```
 	
-	```Cannot determine default configuration path. No file [config.yml config.yaml] in [~/.cloudflared ~/.cloudflare-warp ~/cloudflare-warp /etc/cloudflared /usr/local/etc/cloudflared]```
+  You can then try with the following:
+	- `sudo cloudflared --config /home/<user>/.cloudflared/config.yml service install`
+	- `sudo rm /etc/cloudflared/config.yml`
+	- `ln -s /home/rolete/.cloudflared/config.yml /etc/cloudflared/config.yml`
 	
-  You can then try with `sudo cloudflared --config /home/<user>/.cloudflared/config.yml service install`.
-	
-  Afterwards, the standard `sudo systemctl start cloudflared` and `systemctl status cloudflared`
+  Afterwards, the standard:
+	- `sudo systemctl start cloudflared`
+	- `systemctl status cloudflared`
 
-- To uninstall the service you should do `sudo cloudflared service uninstall`.
+- To uninstall the service you should do:
+	- `sudo systemctl start cloudflared`
+	- `sudo systemctl disable cloudflared`
+	- `sudo cloudflared service uninstall`
+	- `sudo rm /etc/cloudflared/config.yml`
 	
 - If you add IP routes or otherwise change the configuration, restart the service to load the new configuration with `systemctl restart cloudflared`.
 

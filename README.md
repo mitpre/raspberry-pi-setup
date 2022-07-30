@@ -6,36 +6,41 @@ Collection of steps to set up a fresh rPi.
 
 1. Use Raspberry Pi OS (https://www.raspberrypi.com/software/)
 2. With settings (bottom right icon) set the following:
-    - pi's name (i.e., rPi),
-    - enable ssh,
-    - enable keyd login; you need to have public key generated on your machine --> this makes step 4. obsolete.
-    - user name (i.e., rPi) and password, and
-    - configure wifi
+   - pi's name (i.e., rPi),
+   - enable ssh,
+   - enable keyd login; you need to have public key generated on your machine --> this makes step 4. obsolete.
+   - user name (i.e., rPi) and password, and
+   - configure wifi
 
    Now everything is ready for boot. 
 
 3. Perform a SSH login via `ssh rPi@rPi.local` and run `sudo raspi-config`:
-	 - `System Options > Boot / Auto Login > Console` after logging in you can start the graphical interface via `startx`.
-	 - `Display Options > VNC Resolution > 1280x1024`
-	 - `Interface Options > VNC > Yes`
-	 - `Update`
+   - `System Options > Boot / Auto Login > Console` after logging in you can start the graphical interface via `startx`.
+   - `Display Options > VNC Resolution > 1280x1024`
+   - `Interface Options > VNC > Yes`
+   - `Update`
 	 
-4. Set the passwordless SSH acces. Nicely decribed on [raspberrypi.org](https://www.raspberrypi.com/documentation/computers/remote-access.html#passwordless-ssh-access).
+4. If you did not do it when you were creating the SD card in step (2): Set the passwordless SSH acces. Nicely decribed on [raspberrypi.org](https://www.raspberrypi.com/documentation/computers/remote-access.html#passwordless-ssh-access).
 
 5. Python is already nicely supported by newer version, but use `virtualenv` so that you don't f*ck up the system version.
-	- Install `pipx` [Documentation](https://pypa.github.io/pipx/)
-		- `python3 -m pip install --upgrade pip`
-		- `python3 -m pip install --user pipx`
-		- `python3 -m pipx ensurepath`
-		- `pipx completions`
-	- Install `virtualenv` [Documentation](https://virtualenv.pypa.io/)
-		- `pipx install virtualenv`
+
+   1. Only needed in case of Raspbian Lite:
+      - `sudo apt install python3-pip python3-venv -y`
+      
+   2. Always:
+      - Install `pipx` [Documentation](https://pypa.github.io/pipx/)
+        - `python3 -m pip install --upgrade pip`
+        - `python3 -m pip install --user pipx`
+        - `python3 -m pipx ensurepath`
+        - `pipx completions`
+      - Install `virtualenv` [Documentation](https://virtualenv.pypa.io/)
+        - `pipx install virtualenv`
 		
 6. Node.js; [Instructions](https://github.com/mklement0/n-install)
-	- `curl -L https://bit.ly/n-install | bash -s -- -y lts`
+   - `curl -L https://bit.ly/n-install | bash -s -- -y lts`
 
 7. Install `pigpio` [Documentation](https://abyz.me.uk/rpi/pigpio/download.html)
-	- `sudo apt-get install pigpio python3-pigpio`
+   - `sudo apt-get install pigpio python3-pigpio`
 
 8. Run scripts in Jupyter
 
@@ -47,9 +52,9 @@ Lower instructions are still up-to-date, however, it is best to check the actual
 
 The following steps can be used to set a static IP on rPi. Follow it only if you cannot reserve a static IP for rPi on your router. The instructions are based on the "Milliways" answer from [raspberrypi.stackexchange.com](https://raspberrypi.stackexchange.com/a/74428/52236)
 1. PREREQUISITES:
-     - the IP that you want to set and the network size: `ip -4 addr show | grep global` command returns <current ip>/<network size> for all global connections on rPi.
-     - router address/gateway: `ip route | grep default | awk '{print $3}'`
-     - DNS server: `cat /etc/resolv.conf`
+   - the IP that you want to set and the network size: `ip -4 addr show | grep global` command returns <current ip>/<network size> for all global connections on rPi.
+   - router address/gateway: `ip route | grep default | awk '{print $3}'`
+   - DNS server: `cat /etc/resolv.conf`
 2. I followed the `dhcpcd method` and it worked. For other options look into "Milliways" answer.
 Edit the following file `/etc/dhcpcd.conf` via `sudo nano /etc/dhcpcd.conf` and enter the following:
 ```
@@ -85,19 +90,19 @@ You should follow the instructions for ssh access [here](https://developers.clou
 - Side remark: When creating a service, the `sudo cloudflared service install` command might fail with ```Cannot determine default configuration path. No file [config.yml config.yaml] in [~/.cloudflared ~/.cloudflare-warp ~/cloudflare-warp /etc/cloudflared /usr/local/etc/cloudflared]```
 	
   You can then try with the following:
-	- `sudo cloudflared --config /home/<user>/.cloudflared/config.yml service install`
-	- `sudo rm /etc/cloudflared/config.yml`
-	- `ln -s /home/rolete/.cloudflared/config.yml /etc/cloudflared/config.yml`
+  - `sudo cloudflared --config /home/<user>/.cloudflared/config.yml service install`
+  - `sudo rm /etc/cloudflared/config.yml`
+  - `ln -s /home/rolete/.cloudflared/config.yml /etc/cloudflared/config.yml`
 	
   Afterwards, the standard:
-	- `sudo systemctl start cloudflared`
-	- `systemctl status cloudflared`
+  - `sudo systemctl start cloudflared`
+  - `systemctl status cloudflared`
 
 - To uninstall the service you should do:
-	- `sudo systemctl start cloudflared`
-	- `sudo systemctl disable cloudflared`
-	- `sudo cloudflared service uninstall`
-	- `sudo rm /etc/cloudflared/config.yml`
+  - `sudo systemctl start cloudflared`
+  - `sudo systemctl disable cloudflared`
+  - `sudo cloudflared service uninstall`
+  - `sudo rm /etc/cloudflared/config.yml`
 	
 - If you add IP routes or otherwise change the configuration, restart the service to load the new configuration with `systemctl restart cloudflared`.
 

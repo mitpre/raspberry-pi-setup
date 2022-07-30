@@ -78,6 +78,10 @@ If you are opening the Pi to the public, it might be good to install firewall an
 	
 Before you enable the service you should at least allow the `ssh` port!
 
+### Cloudflare
+
+You should follow the instructions for ssh access [here](https://developers.cloudflare.com/cloudflare-one/tutorials/ssh). <b>The only thing that should be different is the installation!</b> Normally you would install it through their [CF Package Repository](https://pkg.cloudflare.com/#debian-title), but because Debian 11 Bullseye is not yet officially supported, I followed [Pi Hole](https://docs.pi-hole.net/guides/dns/cloudflared/#armhf-architecture-32-bit-raspberry-pi) instructions.
+
 ### Shut down command without timeout
 
 `sudo shutdown -h now` or `sudo halt -p`

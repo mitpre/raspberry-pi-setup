@@ -103,7 +103,7 @@ You should follow the instructions for ssh access [here](https://developers.clou
   - `systemctl status cloudflared`
 
 - To uninstall the service you should do:
-  - `sudo systemctl start cloudflared`
+  - `sudo systemctl stop cloudflared`
   - `sudo systemctl disable cloudflared`
   - `sudo cloudflared service uninstall`
   - `sudo rm /etc/cloudflared/config.yml`
